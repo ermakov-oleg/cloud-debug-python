@@ -98,7 +98,8 @@ cdbg_native_module = Extension(
         '-O3',
     ] + extra_compile_args,
     extra_link_args=static_libs + extra_link_args,
-    libraries=['rt'])
+    # libraries=['rt']
+)
 
 setup(
     name='google-python-cloud-debugger',
