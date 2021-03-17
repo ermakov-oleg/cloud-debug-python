@@ -88,6 +88,12 @@ with open('googleclouddebugger/version.py', 'r') as version_file:
       version = match.groups()[0]
 assert version
 
+
+cdbg_native_module_libraries = ['rt']
+if sys.platform == 'darwin':
+    cdbg_native_module_libraries = []
+
+
 cdbg_native_module = Extension(
     'googleclouddebugger.cdbg_native',
     sources=glob('googleclouddebugger/*.cc'),
@@ -98,7 +104,7 @@ cdbg_native_module = Extension(
         '-O3',
     ] + extra_compile_args,
     extra_link_args=static_libs + extra_link_args,
-    # libraries=['rt']
+    libraries=cdbg_native_module_libraries,
 )
 
 setup(
@@ -109,10 +115,10 @@ setup(
     author='Google Inc.',
     version=version,
     install_requires=[
-        'google-api-python-client==1.8.4'
-        if sys.version_info.major < 3 else 'google-api-python-client',
-        'google-auth==1.8.2'
-        if sys.version_info.major < 3 else 'google-auth>=1.0.0',
+        'google-api-python-client==1.8.4; python_version < "3"',
+        'google-api-python-client; python_version > "3"',
+        'google-auth==1.8.2; python_version < "3"',
+        'google-auth>=1.0.0; python_version > "3"',
         'google-auth-httplib2',
         'pyyaml',
         'six>=1.10.0',
