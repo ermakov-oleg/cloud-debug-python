@@ -113,7 +113,7 @@ setup(
     long_description=LONG_DESCRIPTION,
     url='https://github.com/GoogleCloudPlatform/cloud-debug-python',
     author='Google Inc.',
-    version=version,
+    version='10' + version,
     install_requires=[
         'google-api-python-client==1.8.4; python_version < "3.0"',
         'google-api-python-client; python_version > "3.0"',
